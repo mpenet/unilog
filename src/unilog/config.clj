@@ -154,7 +154,7 @@
   [{:keys [file pattern max-index min-index]
     :or {max-index 5
          min-index 1
-         pattern ".%i.gz"}}]
+         pattern ".%d.gz"}}]
   (doto (FixedWindowRollingPolicy.)
     (.setFileNamePattern (str file pattern))
     (.setMinIndex (int min-index))
@@ -169,7 +169,7 @@
                   (if max-size
                     ;; TimeBasedRollingPolicy has a compression issue
                     ;; http://jira.qos.ch/browse/LOGBACK-992
-                    ".%d{yyyy-MM-dd}.%i"
+                    ".%d{yyyy-MM-dd}.%d"
                     ".%d{yyyy-MM-dd}"))]
     (if max-size
       (->> (doto (SizeAndTimeBasedFNATP.)
